@@ -1,6 +1,8 @@
 project_name = "aws-cluster"
 region = "us-east-1"
 
+k8s_version = "1.31"
+
 ssm_vpc = "/vpc-eks/vpc/id"
 ssm_public_subnets = [
  "/vpc-eks/subnets/public/us-east-1a/vpc-public_subnets-1a",

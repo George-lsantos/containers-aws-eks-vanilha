@@ -2,6 +2,10 @@ variable project_name {
 
 }
 
+variable k8s_version {
+    type = string
+}
+
 variable region {
 
 
