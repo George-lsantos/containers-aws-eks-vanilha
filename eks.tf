@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "main" {
-  name     = var.cluster_name
+  name     = var.project_name
   version  = var.k8s_version
   role_arn = aws_iam_role.eks_cluster_role.arn
 
@@ -19,11 +19,21 @@ resource "aws_eks_cluster" "main" {
     authentication_mode                         = "API_AND_CONFIG_MAP"
     bootstrap_cluster_creator_admin_permissions = true
   }
-  enable_cluster_log_types = [
-    "api", "audit", "authenticator", "controllerManager", "scheduler"
-    ]
-    tags = {
-        "kubernetes.io/cluster/${var.project_name}" = "shared"
-}
 
+enabled_cluster_log_types = [
+  "api",
+  "audit",
+  "authenticator",
+  "controllerManager",
+  "scheduler"
+]
+
+  tags = {
+    "kubernetes.io/cluster/${var.project_name}" = "shared"
+  }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.eks_cluster_policy,
+    aws_iam_role_policy_attachment.eks_service_policy
+  ]
 }
