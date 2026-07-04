@@ -25,3 +25,5 @@ resource "aws_eks_cluster" "main" {
     tags = {
         "kubernetes.io/cluster/${var.project_name}" = "shared"
 }
+
+}
